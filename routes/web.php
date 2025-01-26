@@ -1,33 +1,75 @@
 <?php
 
-use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\{
+    CommentController,
+    PostController,
+    ReactionTypeController,
+    PostStatusController,
+    ReactionController,
+    ReplyController,
+    UserController,
+};
+
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+// Route::resource('commetns', CommentController::class);
+// Route::resource('posts', PostController::class);
+// Route::resource('post-reactions', ReactionTypeController::class);
+// Route::resource('post-statuses', PostStatusController::class);
+// Route::resource('reactions', ReactionController::class);
+// Route::resource('replies', ReplyController::class);
+// Route::resource('users', UserController::class);
 
-use App\Http\Controllers\PostController;
+Route::get('posts/new', [PostController::class, 'new']);
+Route::get('posts/today', [PostController::class, 'today']);
+Route::get('posts/pending', [PostController::class, 'pending']);
+Route::get('posts/from/{user_id}', [PostController::class, 'user_posts']);
 
-
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(PostController::class)->prefix('posts')->group(function () {
+    Route::get('new', 'new');
+    Route::get('today', 'today');
+    Route::get('pending', 'pending');
+    Route::get('from/{user_id}', 'user_posts');
 });
 
-$static_pages = ['contact-us', 'about', 'services'];
+Route::resources(
+    [
+        'commetns' => CommentController::class,
+        'posts' => PostController::class,
+        'post-reactions' => ReactionTypeController::class,
+        'post-statuses' => PostStatusController::class,
+        'reactions' => ReactionController::class,
+        'replies' => ReplyController::class,
+        'users' => UserController::class,
+    ]
+);
 
-foreach ($static_pages as $page) {
-    Route::view($page, "static.$page");
-}
+
+Route::get('init', function () {
+
+
+    $controllers = [
+        'Post',
+        'Comment',
+        'Test',
+        'PostReaction',
+        'PostStatus',
+        'Reaction',
+        'ReactionType',
+        'Reply',
+        'User',
+        'Last'
+    ];
+
+
+    foreach ($controllers as $controller) {
+        // php artisan make:controller NameController -r
+        Artisan::call('make:controller', ['name' => "{$controller}Controller", '-r' => true]);
+    }
 
 
 
-// Route::get('posts', 'App\Http\Controllers\PostController@index');
-Route::get('posts', [PostController::class, 'index']);
-Route::get('posts/{id}', [PostController::class, 'show']);
 
-
-
-Route::resource('replies', ReplyController::class);
-
-// Fallback
-Route::fallback(function () {
-    return view('static.404');
+    return 'DONE';
 });

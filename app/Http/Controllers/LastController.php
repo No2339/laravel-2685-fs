@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class LastController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'All posts';
+        //
     }
 
     /**
@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        return $id;
+        //
     }
 
     /**
@@ -60,13 +60,5 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function new () {
-        return 'All new posts without any comments';
-    }
-
-    public function today () {
-        return 'All today\'s posts';
     }
 }

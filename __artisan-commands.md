@@ -9,8 +9,10 @@ php artisan route:list
 php artisan r:l
 
 
+# create a controller
 php artisan make:controller ReplyController
 
 
 # create a controller with basic 7 resource methods
 php artisan make:controller ReplyController -r
+

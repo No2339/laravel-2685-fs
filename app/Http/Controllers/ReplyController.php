@@ -11,7 +11,7 @@ class ReplyController extends Controller
      */
     public function index()
     {
-        return view('replies.index');
+        //
     }
 
     /**
@@ -19,7 +19,7 @@ class ReplyController extends Controller
      */
     public function create()
     {
-        return 'form to add a reply';
+        //
     }
 
     /**
@@ -35,7 +35,7 @@ class ReplyController extends Controller
      */
     public function show(string $id)
     {
-        return $id;
+        //
     }
 
     /**
