@@ -8,11 +8,30 @@ php artisan ser --port=5400
 php artisan route:list
 php artisan r:l
 
-
 # create a controller
 php artisan make:controller ReplyController
 
-
 # create a controller with basic 7 resource methods
 php artisan make:controller ReplyController -r
+
+# Create a new migration (TABLE)
+php artisan make:migration create_posts_table
+
+# Check migrations status
+php artisan migrate:status
+
+# Run pending migrations
+php artisan migrate
+
+# Undo a migration (Rollback)
+php artisan migrate:rollback
+
+# Undo number of migration (Rollback specifc steps)
+php artisan migrate:rollback --step=3
+
+# Undo all migrations at once and run them again
+php artisan migrate:refresh
+
+# Drop all tables and re-run all migrations
+php artisan migrate:fresh
 
